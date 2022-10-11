@@ -1,6 +1,6 @@
 #============================== CREAMOS LOS INDICES CON SUS MAPPINGS CORRESPONDIENTES ==================================
 ## Index --> executions
-curl -L -X PUT 'http://10.20.128.201:9200/executions' \
+curl -L -X PUT 'http://{{YOUR_IP}}:9200/executions' \
 -H 'Content-Type: application/json' \
 --data-raw '{
     "settings" : {
@@ -22,7 +22,7 @@ curl -L -X PUT 'http://10.20.128.201:9200/executions' \
 }'
 
 ## Index --> workers
-curl -L -X PUT 'http://10.20.128.201:9200/workers' \
+curl -L -X PUT 'http://{{YOUR_IP}}:9200/workers' \
 -H 'Content-Type: application/json' \
 --data-raw '{
     "settings" : {
@@ -55,7 +55,7 @@ curl -L -X PUT 'http://10.20.128.201:9200/workers' \
 
 #============================== INSERT (BULK) DE LOS WORKERS ACTUALES =========================================
 #PARA LOS NUEVOS WORKER, TOMAR UN INSERT DE EJEMPLO Y EDITARLO
-curl -L -X POST 'http://10.20.128.201:9200/_bulk' \
+curl -L -X POST 'http://{{YOUR_IP}}:9200/_bulk' \
 -H 'Content-Type: application/json' \
 --data-raw '{ "index" : { "_index" : "workers", "_id" : "test-worker"} }
 {"description":"My Test Worker","state":"IDLE","lastMessage":"Worker with id test-worker has terminated","progress":43,"port":0,"pid":0,"ip":"","memoryUsage":30,"elapsed":13715,"isCancelable":true,"isKillable":true,"isEnabled":true, "lastExecutionDate":1656613636858, "lastState": "IDLE", "schedule": "0 23 1/1 * ? *", "retries": 3, "expires_at":1656613636858}
