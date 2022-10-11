@@ -1,0 +1,32 @@
+# This file is where you define your pipelines. You can define multiple.
+# For more information on multiple pipelines, see the documentation:
+#   https://www.elastic.co/guide/en/logstash/current/multiple-pipelines.html
+# - pipeline.id: worker_logs
+#   path.config: "/usr/share/logstash/pipeline/logstash.conf"
+# - pipeline.id: ms_manager_logs
+#   path.config: "/usr/share/logstash/pipeline/ms_process_manager.conf"
+
+
+- pipeline.id: beats-server
+  config.string: |
+    input { beats { port => 5044 } }
+    output {
+        if "worker_logs" in [tags] {
+          pipeline { 
+            send_to => workerlogs 
+          }
+        } 
+        else if "ms_manager_logs" in [tags] {
+          pipeline { 
+            send_to => msmanagerlogs 
+          }
+        } 
+    }
+
+##########
+- pipeline.id: workerlogs
+  path.config: "/usr/share/logstash/pipeline/logstash.conf"
+
+##########
+- pipeline.id: msmanagerlogs
+  path.config: "/usr/share/logstash/pipeline/ms_process_manager.conf"

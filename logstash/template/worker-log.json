@@ -1,0 +1,26 @@
+{
+  "index_patterns": ["worker-log-*"],
+  "priority": 500,
+  "template": {
+    "aliases": {
+      "worker-log": {}
+    },
+    "settings": {
+      "number_of_shards": 3,
+      "number_of_replicas": 1
+    },
+    "mappings": {
+      "properties": {
+        "application": { "type": "text" },
+        "clase": { "type": "text" },
+        "fechaHora": { "type": "text" },
+        "lineaLog": { "type": "integer" },
+        "logLevel": { "type": "keyword" },
+        "mensaje": { "type": "text" },
+        "nombreWorker": { "type": "keyword" },
+        "processTime": { "type": "date" },
+        "thread": { "type": "text" }
+      }
+    }
+  }
+}
